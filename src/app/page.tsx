@@ -147,17 +147,13 @@ export default function HomePage() {
                 >
                   <div className="absolute inset-0 bg-gradient-to-r from-yellow-400 to-green-500 rounded-2xl blur-xl opacity-0 group-hover:opacity-50 transition-opacity"></div>
                   <div className="relative aspect-square rounded-2xl overflow-hidden border-4 border-white/30 shadow-2xl">
-                    {/* Placeholder for images - in production, use actual images */}
-                    <div className="w-full h-full bg-gradient-to-br from-green-400 to-emerald-600 flex items-center justify-center">
-                      <span className="text-white text-8xl opacity-30">🌿</span>
-                    </div>
-                    {/* Uncomment when images are available */}
-                    {/* <Image
+                    {/* Images uncomment kiya */}
+                    <Image
                       src={image.src}
                       alt={image.alt}
                       fill
                       className="object-cover group-hover:scale-110 transition-transform duration-500"
-                    /> */}
+                    />
                     
                     {/* Image Overlay */}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -198,17 +194,13 @@ export default function HomePage() {
                 className="group bg-white rounded-3xl p-6 shadow-xl transform hover:scale-105 transition-all duration-500 hover:shadow-2xl"
               >
                 <div className="relative aspect-square bg-gradient-to-br from-green-400 to-emerald-600 rounded-2xl mb-4 overflow-hidden">
-                  {/* Placeholder for product image */}
-                  <div className="w-full h-full flex items-center justify-center">
-                    <span className="text-white text-6xl">🌿</span>
-                  </div>
-                  {/* Uncomment when images are available */}
-                  {/* <Image
+                  {/* Product image uncomment kiya */}
+                  <Image
                     src={product.image}
                     alt={product.name}
                     fill
                     className="object-cover group-hover:scale-110 transition-transform duration-500"
-                  /> */}
+                  />
                   
                   {/* Quick view button */}
                   <button className="absolute top-4 right-4 w-10 h-10 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
@@ -269,16 +261,14 @@ export default function HomePage() {
                   index === 0 ? 'md:col-span-2 md:row-span-2' : ''
                 }`}
               >
-                <div className="aspect-square bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center">
-                  <span className="text-white text-6xl opacity-30">🌿</span>
+                <div className="relative w-full h-full aspect-square">
+                  <Image
+                    src={image.src}
+                    alt={image.alt}
+                    fill
+                    className="object-cover group-hover:scale-110 transition-transform duration-500"
+                  />
                 </div>
-                {/* Uncomment when images are available */}
-                {/* <Image
-                  src={image.src}
-                  alt={image.alt}
-                  fill
-                  className="object-cover group-hover:scale-110 transition-transform duration-500"
-                /> */}
                 
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
                   <div className="p-4">
@@ -317,17 +307,15 @@ export default function HomePage() {
           </button>
 
           <div className="max-w-5xl max-h-[80vh] mx-4">
-            <div className="relative aspect-video bg-gradient-to-br from-green-500 to-emerald-600 rounded-2xl flex items-center justify-center">
-              <span className="text-white text-9xl">🌿</span>
+            <div className="relative aspect-video">
+              <Image
+                src={filteredImages[selectedImage].src}
+                alt={filteredImages[selectedImage].alt}
+                width={1200}
+                height={800}
+                className="object-contain rounded-2xl"
+              />
             </div>
-            {/* Uncomment when images are available */}
-            {/* <Image
-              src={filteredImages[selectedImage].src}
-              alt={filteredImages[selectedImage].alt}
-              width={1200}
-              height={800}
-              className="object-contain rounded-2xl"
-            /> */}
             
             <div className="text-center mt-4 text-white">
               <h3 className="text-2xl font-bold mb-2">{filteredImages[selectedImage].title}</h3>
