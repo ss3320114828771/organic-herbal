@@ -87,10 +87,11 @@ export async function GET(request: Request) {
 // GET /api/tasks/[id] - Get single task by ID
 export async function GET_BY_ID(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }  // FIX 1: Add Promise
 ) {
   try {
-    const task = tasks.find(t => t.id === params.id)
+    const { id } = await params  // FIX 2: Add await
+    const task = tasks.find(t => t.id === id)
     
     if (!task) {
       return NextResponse.json(

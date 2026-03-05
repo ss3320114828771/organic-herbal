@@ -14,10 +14,10 @@ let taskComments: Record<string, any[]> = {
 // GET /api/tasks/[taskId]/comments - Get all comments for a task
 export async function GET(
   request: Request,
-  { params }: { params: { taskId: string } }
+  { params }: { params: Promise<{ taskId: string }> }  // CHANGE 1: Promise type
 ) {
   try {
-    const { taskId } = params
+    const { taskId } = await params  // CHANGE 2: await params
     
     if (!taskId) {
       return NextResponse.json(
@@ -50,10 +50,10 @@ export async function GET(
 // POST /api/tasks/[taskId]/comments - Add a new comment
 export async function POST(
   request: Request,
-  { params }: { params: { taskId: string } }
+  { params }: { params: Promise<{ taskId: string }> }  // CHANGE 1: Promise type
 ) {
   try {
-    const { taskId } = params
+    const { taskId } = await params  // CHANGE 2: await params
     const body = await request.json()
     const { content, userId, userName } = body
     
@@ -126,10 +126,10 @@ export async function POST(
 // PUT /api/tasks/[taskId]/comments - Update a comment
 export async function PUT(
   request: Request,
-  { params }: { params: { taskId: string } }
+  { params }: { params: Promise<{ taskId: string }> }  // CHANGE 1: Promise type
 ) {
   try {
-    const { taskId } = params
+    const { taskId } = await params  // CHANGE 2: await params
     const body = await request.json()
     const { commentId, content, userId } = body
     
@@ -219,10 +219,10 @@ export async function PUT(
 // PATCH /api/tasks/[taskId]/comments - Partially update a comment
 export async function PATCH(
   request: Request,
-  { params }: { params: { taskId: string } }
+  { params }: { params: Promise<{ taskId: string }> }  // CHANGE 1: Promise type
 ) {
   try {
-    const { taskId } = params
+    const { taskId } = await params  // CHANGE 2: await params
     const body = await request.json()
     const { commentId, content, userId } = body
     
@@ -307,10 +307,10 @@ export async function PATCH(
 // DELETE /api/tasks/[taskId]/comments - Delete a comment
 export async function DELETE(
   request: Request,
-  { params }: { params: { taskId: string } }
+  { params }: { params: Promise<{ taskId: string }> }  // CHANGE 1: Promise type
 ) {
   try {
-    const { taskId } = params
+    const { taskId } = await params  // CHANGE 2: await params
     const { searchParams } = new URL(request.url)
     const commentId = searchParams.get('commentId')
     const userId = searchParams.get('userId')
@@ -382,10 +382,10 @@ export async function DELETE(
 // DELETE /api/tasks/[taskId]/comments/all - Delete all comments for a task
 export async function DELETE_ALL(
   request: Request,
-  { params }: { params: { taskId: string } }
+  { params }: { params: Promise<{ taskId: string }> }  // CHANGE 1: Promise type
 ) {
   try {
-    const { taskId } = params
+    const { taskId } = await params  // CHANGE 2: await params
     
     if (!taskId) {
       return NextResponse.json(
