@@ -33,7 +33,6 @@ class DatabaseConnection {
   async connect(): Promise<boolean> {
     try {
       console.log(`Connecting to database at ${this.config.host}:${this.config.port}/${this.config.database}`)
-      // Simulate connection delay
       await new Promise(resolve => setTimeout(resolve, 100))
       this.isConnected = true
       console.log('Database connected successfully')
@@ -57,7 +56,6 @@ class DatabaseConnection {
     this.queryCount++
     console.log(`Executing query: ${sql}`)
     
-    // Mock query execution
     await new Promise(resolve => setTimeout(resolve, 50))
     
     return {
@@ -98,6 +96,34 @@ class MockDataStore {
     this.stores.set('orders', [
       { id: '1', orderNumber: 'ORD-001', total: 70.38, status: 'delivered' },
       { id: '2', orderNumber: 'ORD-002', total: 59.49, status: 'shipped' }
+    ])
+
+    // ===== ADD TASKS STORE HERE =====
+    this.stores.set('tasks', [
+      { 
+        id: '1', 
+        title: 'Complete project report', 
+        status: 'pending',
+        description: 'Finish the quarterly report',
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString()
+      },
+      { 
+        id: '2', 
+        title: 'Review pull requests', 
+        status: 'in-progress',
+        description: 'Check team PRs',
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString()
+      },
+      { 
+        id: '3', 
+        title: 'Update documentation', 
+        status: 'completed',
+        description: 'Update API docs',
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString()
+      }
     ])
   }
 
@@ -230,13 +256,11 @@ export const sql = {
   }
 }
 
-// Transaction helper - FIXED line 328
+// Transaction helper
 export async function transaction<T>(
   callback: (trx: { query: (sql: string, params?: any[]) => Promise<any> }) => Promise<T>
 ): Promise<T> {
-  // Mock transaction
   try {
-    // Begin transaction
     console.log('Beginning transaction')
     
     const result = await callback({
@@ -245,11 +269,9 @@ export async function transaction<T>(
       }
     })
     
-    // Commit transaction
     console.log('Committing transaction')
     return result
   } catch (error) {
-    // Rollback transaction
     console.log('Rolling back transaction')
     throw error
   }
@@ -334,17 +356,14 @@ export async function healthCheck(): Promise<{
 
 // Example usage
 export async function example() {
-  // Connect to database
   await db.connect()
 
-  // Mock queries
   const users = await mockDb.find('users')
   console.log('Users:', users)
 
   const user = await mockDb.findById('users', '1')
   console.log('User:', user)
 
-  // Create new user
   const newUser = await mockDb.create('users', {
     name: 'New User',
     email: 'new@example.com',
@@ -352,27 +371,21 @@ export async function example() {
   })
   console.log('Created user:', newUser)
 
-  // Update user
   const updated = await mockDb.update('users', newUser.id, {
     name: 'Updated Name'
   })
   console.log('Updated user:', updated)
 
-  // Query with conditions
   const admins = await mockDb.find('users', { role: 'admin' })
   console.log('Admins:', admins)
 
-  // Count records
   const userCount = await mockDb.count('users')
   console.log('Total users:', userCount)
 
-  // Delete user
   await mockDb.delete('users', newUser.id)
 
-  // Health check
   const health = await healthCheck()
   console.log('Health:', health)
 
-  // Disconnect
   await db.disconnect()
 }
