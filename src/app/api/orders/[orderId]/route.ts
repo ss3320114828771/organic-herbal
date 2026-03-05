@@ -1,118 +1,97 @@
 import { NextResponse } from 'next/server'
+import { mockDb } from '@/lib/db'
 
-// Mock orders data
-const orders: any = {
-  'ORD-001': {
-    id: 'ORD-001',
-    userId: 'user-123',
-    status: 'PENDING',
-    total: 299.99,
-    items: [
-      { productId: 'P1', name: 'Product 1', quantity: 2, price: 99.99 }
-    ],
-    createdAt: new Date().toISOString()
-  },
-  'ORD-002': {
-    id: 'ORD-002',
-    userId: 'user-123',
-    status: 'SHIPPED',
-    total: 149.99,
-    items: [
-      { productId: 'P2', name: 'Product 2', quantity: 1, price: 149.99 }
-    ],
-    createdAt: new Date().toISOString()
-  }
-}
-
+// GET /api/orders/[orderId]
 export async function GET(
   request: Request,
-  { params }: { params: { orderId: string } }
+  { params }: { params: Promise<{ orderId: string }> }
 ) {
   try {
-    const { orderId } = params
+    const { orderId } = await params
     
-    const order = orders[orderId]
-    
+    const order = await mockDb.findById('orders', orderId)
+
     if (!order) {
-      return NextResponse.json(
-        { error: 'Order not found' },
-        { status: 404 }
-      )
+      return NextResponse.json({ 
+        error: 'Order not found' 
+      }, { status: 404 })
     }
 
-    return NextResponse.json({
-      success: true,
-      order: order
+    return NextResponse.json({ 
+      success: true, 
+      order 
     })
-
   } catch (error) {
-    return NextResponse.json(
-      { error: 'Failed to fetch order' },
-      { status: 500 }
-    )
+    console.error('Error in GET order:', error)
+    return NextResponse.json({ 
+      error: 'Failed to fetch order' 
+    }, { status: 500 })
   }
 }
 
-export async function PATCH(
+// PUT /api/orders/[orderId]
+export async function PUT(
   request: Request,
-  { params }: { params: { orderId: string } }
+  { params }: { params: Promise<{ orderId: string }> }
 ) {
   try {
-    const { orderId } = params
+    const { orderId } = await params
     const body = await request.json()
     
-    if (!orders[orderId]) {
-      return NextResponse.json(
-        { error: 'Order not found' },
-        { status: 404 }
-      )
+    // Validate required fields
+    if (!body.orderNumber) {
+      return NextResponse.json({ 
+        error: 'Order number is required' 
+      }, { status: 400 })
     }
-
-    // Update order
-    orders[orderId] = {
-      ...orders[orderId],
+    
+    const order = await mockDb.update('orders', orderId, {
       ...body,
       updatedAt: new Date().toISOString()
-    }
-
-    return NextResponse.json({
-      success: true,
-      order: orders[orderId]
     })
 
+    if (!order) {
+      return NextResponse.json({ 
+        error: 'Order not found' 
+      }, { status: 404 })
+    }
+
+    return NextResponse.json({ 
+      success: true, 
+      order 
+    })
   } catch (error) {
-    return NextResponse.json(
-      { error: 'Failed to update order' },
-      { status: 500 }
-    )
+    console.error('Error in PUT order:', error)
+    return NextResponse.json({ 
+      error: 'Failed to update order' 
+    }, { status: 500 })
   }
 }
 
+// DELETE /api/orders/[orderId]
 export async function DELETE(
   request: Request,
-  { params }: { params: { orderId: string } }
+  { params }: { params: Promise<{ orderId: string }> }
 ) {
   try {
-    const { orderId } = params
+    const { orderId } = await params
     
-    if (!orders[orderId]) {
-      return NextResponse.json(
-        { error: 'Order not found' },
-        { status: 404 }
-      )
+    const deleted = await mockDb.delete('orders', orderId)
+
+    if (!deleted) {
+      return NextResponse.json({ 
+        error: 'Order not found' 
+      }, { status: 404 })
     }
 
-    delete orders[orderId]
-
-    return NextResponse.json({
+    return NextResponse.json({ 
       success: true,
-      message: 'Order deleted'
+      message: 'Order deleted successfully' 
     })
-
   } catch (error) {
-    return NextResponse.json(
-      { error: 'Failed to delete order' },
-      { status: 500 }
-    )
+    console.error('Error in DELETE order:', error)
+    return NextResponse.json({ 
+      error: 'Failed to delete order' 
+    }, { status: 500 })
   }
 }
