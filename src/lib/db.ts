@@ -106,29 +106,23 @@ class MockDataStore {
         id: '1', 
         title: 'Complete project report', 
         status: 'pending',
-        description: 'Finish the quarterly report',
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString()
+        description: 'Finish the quarterly report'
       },
       { 
         id: '2', 
         title: 'Review pull requests', 
         status: 'in-progress',
-        description: 'Check team PRs',
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString()
+        description: 'Check team PRs'
       },
       { 
         id: '3', 
         title: 'Update documentation', 
         status: 'completed',
-        description: 'Update API docs',
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString()
+        description: 'Update API docs'
       }
     ])
 
-    // ===== PROJECTS STORE =====
+    // Projects store
     this.stores.set('projects', [
       { 
         id: '1', 
@@ -136,9 +130,7 @@ class MockDataStore {
         status: 'active',
         description: 'Redesign company website with modern UI',
         progress: 65,
-        ownerId: '1',
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString()
+        ownerId: '1'
       },
       { 
         id: '2', 
@@ -146,9 +138,7 @@ class MockDataStore {
         status: 'planning',
         description: 'Build cross-platform mobile app',
         progress: 15,
-        ownerId: '1',
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString()
+        ownerId: '1'
       },
       { 
         id: '3', 
@@ -156,9 +146,7 @@ class MockDataStore {
         status: 'completed',
         description: 'Q2 marketing campaign',
         progress: 100,
-        ownerId: '2',
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString()
+        ownerId: '2'
       }
     ])
   }
@@ -388,40 +376,4 @@ export async function healthCheck(): Promise<{
       }
     }
   }
-}
-
-// Example usage
-export async function example() {
-  await db.connect()
-
-  const users = await mockDb.find('users')
-  console.log('Users:', users)
-
-  const user = await mockDb.findById('users', '1')
-  console.log('User:', user)
-
-  const newUser = await mockDb.create('users', {
-    name: 'New User',
-    email: 'new@example.com',
-    role: 'user'
-  })
-  console.log('Created user:', newUser)
-
-  const updated = await mockDb.update('users', newUser.id, {
-    name: 'Updated Name'
-  })
-  console.log('Updated user:', updated)
-
-  const admins = await mockDb.find('users', { role: 'admin' })
-  console.log('Admins:', admins)
-
-  const userCount = await mockDb.count('users')
-  console.log('Total users:', userCount)
-
-  await mockDb.delete('users', newUser.id)
-
-  const health = await healthCheck()
-  console.log('Health:', health)
-
-  await db.disconnect()
 }
