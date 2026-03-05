@@ -74,16 +74,14 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50">
       
-      {/* Hero Section with Image Slider */}
+      {/* ===== HERO SECTION BUTTONS ===== */}
       <section className="relative overflow-hidden bg-gradient-to-r from-green-900 via-emerald-900 to-teal-900 py-20">
-        {/* Animated Background Elements */}
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-0 left-0 w-full h-full bg-[url('/leaf-pattern.png')] bg-repeat"></div>
         </div>
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            {/* Bismillah at Top */}
             <div className="inline-block bg-white/10 backdrop-blur-lg px-8 py-4 rounded-2xl border border-white/20 mb-8">
               <p className="text-white text-3xl font-arabic animate-glow">
                 بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم
@@ -99,6 +97,8 @@ export default function HomePage() {
               Discover the power of nature with our premium organic herbal products. 
               100% natural, sustainably sourced, and carefully crafted for your wellbeing.
             </p>
+            
+            {/* ✅ HERO BUTTONS - 2 Buttons */}
             <div className="flex gap-4 justify-center">
               <Link
                 href="/shop/products"
@@ -115,11 +115,11 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* Image Gallery Grid - PICS OPTION */}
+          {/* Category Filter Buttons */}
           <div className="mt-16">
             <h2 className="text-3xl font-bold text-white text-center mb-8">Our Premium Collection</h2>
             
-            {/* Category Filters */}
+            {/* ✅ CATEGORY FILTER BUTTONS - 7 Buttons */}
             <div className="flex flex-wrap gap-3 justify-center mb-10">
               {categories.map((category) => (
                 <button
@@ -147,7 +147,6 @@ export default function HomePage() {
                 >
                   <div className="absolute inset-0 bg-gradient-to-r from-yellow-400 to-green-500 rounded-2xl blur-xl opacity-0 group-hover:opacity-50 transition-opacity"></div>
                   <div className="relative aspect-square rounded-2xl overflow-hidden border-4 border-white/30 shadow-2xl">
-                    {/* Images uncomment kiya */}
                     <Image
                       src={image.src}
                       alt={image.alt}
@@ -175,7 +174,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Featured Products Section */}
+      {/* ===== FEATURED PRODUCTS SECTION BUTTONS ===== */}
       <section className="py-20 bg-gradient-to-br from-white to-green-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-4xl md:text-5xl font-bold text-center mb-4">
@@ -194,7 +193,6 @@ export default function HomePage() {
                 className="group bg-white rounded-3xl p-6 shadow-xl transform hover:scale-105 transition-all duration-500 hover:shadow-2xl"
               >
                 <div className="relative aspect-square bg-gradient-to-br from-green-400 to-emerald-600 rounded-2xl mb-4 overflow-hidden">
-                  {/* Product image uncomment kiya */}
                   <Image
                     src={product.image}
                     alt={product.name}
@@ -202,7 +200,7 @@ export default function HomePage() {
                     className="object-cover group-hover:scale-110 transition-transform duration-500"
                   />
                   
-                  {/* Quick view button */}
+                  {/* ✅ QUICK VIEW BUTTON */}
                   <button className="absolute top-4 right-4 w-10 h-10 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
                     <span className="text-xl">🔍</span>
                   </button>
@@ -221,6 +219,8 @@ export default function HomePage() {
 
                 <div className="flex items-center justify-between">
                   <span className="text-3xl font-bold text-green-700">${product.price}</span>
+                  
+                  {/* ✅ ADD TO CART BUTTON */}
                   <button className="px-6 py-3 bg-gradient-to-r from-green-600 to-emerald-600 text-white rounded-xl font-semibold transform hover:scale-105 transition-all duration-300 hover:shadow-xl">
                     Add to Cart
                   </button>
@@ -229,6 +229,7 @@ export default function HomePage() {
             ))}
           </div>
 
+          {/* ✅ VIEW ALL PRODUCTS BUTTON */}
           <div className="text-center mt-12">
             <Link
               href="/shop/products"
@@ -241,7 +242,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Image Gallery Section - PICS OPTION */}
+      {/* Image Gallery Section */}
       <section className="py-20 bg-gradient-to-br from-green-900 via-emerald-900 to-teal-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-4xl md:text-5xl font-bold text-center mb-4 text-white">
@@ -285,6 +286,7 @@ export default function HomePage() {
       {/* Lightbox Modal for Image Gallery */}
       {selectedImage !== null && (
         <div className="fixed inset-0 bg-black/95 backdrop-blur-xl z-50 flex items-center justify-center">
+          {/* ✅ LIGHTBOX NAVIGATION BUTTONS */}
           <button
             onClick={closeLightbox}
             className="absolute top-6 right-6 text-white text-4xl hover:text-gray-300 z-10"
@@ -323,7 +325,7 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* Thumbnail Navigation */}
+          {/* ✅ THUMBNAIL NAVIGATION BUTTONS */}
           <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex gap-2">
             {filteredImages.map((_, index) => (
               <button
@@ -371,6 +373,193 @@ export default function HomePage() {
               </div>
               <h3 className="text-xl font-bold mb-2">Sustainable</h3>
               <p className="text-gray-600">Environmentally friendly farming practices</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ===== CONTACT SECTION BUTTONS ===== */}
+      <section className="py-20 bg-gradient-to-br from-green-900 to-emerald-900">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+              Contact Us
+            </h2>
+            <p className="text-white/80 text-lg max-w-2xl mx-auto">
+              Get in touch with us for any questions or inquiries
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {/* Contact Form */}
+            <div className="bg-white/10 backdrop-blur-lg rounded-3xl p-8 border border-white/20">
+              <h3 className="text-2xl font-bold text-white mb-6">Send us a Message</h3>
+              
+              <form className="space-y-4">
+                <div>
+                  <input
+                    type="text"
+                    placeholder="Your Name"
+                    className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/50 focus:outline-none focus:border-green-500"
+                  />
+                </div>
+                <div>
+                  <input
+                    type="email"
+                    placeholder="Your Email"
+                    className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/50 focus:outline-none focus:border-green-500"
+                  />
+                </div>
+                <div>
+                  <textarea
+                    rows={4}
+                    placeholder="Your Message"
+                    className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/50 focus:outline-none focus:border-green-500"
+                  ></textarea>
+                </div>
+                
+                {/* ✅ SEND MESSAGE BUTTON */}
+                <button
+                  type="submit"
+                  className="w-full px-6 py-3 bg-gradient-to-r from-green-500 to-emerald-500 text-white rounded-xl font-semibold hover:from-green-600 hover:to-emerald-600 transition-all transform hover:scale-105"
+                >
+                  Send Message
+                </button>
+              </form>
+            </div>
+
+            {/* Contact Info */}
+            <div className="bg-white/10 backdrop-blur-lg rounded-3xl p-8 border border-white/20">
+              <h3 className="text-2xl font-bold text-white mb-6">Contact Information</h3>
+              
+              <div className="space-y-6">
+                <div className="flex items-start space-x-4">
+                  <div className="w-12 h-12 bg-green-500/20 rounded-xl flex items-center justify-center text-2xl">
+                    📍
+                  </div>
+                  <div>
+                    <h4 className="text-white font-semibold">Address</h4>
+                    <p className="text-white/60">123 Herbal Street, Natural City, NC 12345</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start space-x-4">
+                  <div className="w-12 h-12 bg-green-500/20 rounded-xl flex items-center justify-center text-2xl">
+                    📞
+                  </div>
+                  <div>
+                    <h4 className="text-white font-semibold">Phone</h4>
+                    <p className="text-white/60">+1 (555) 123-4567</p>
+                    <p className="text-white/60">+1 (555) 987-6543</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start space-x-4">
+                  <div className="w-12 h-12 bg-green-500/20 rounded-xl flex items-center justify-center text-2xl">
+                    ✉️
+                  </div>
+                  <div>
+                    <h4 className="text-white font-semibold">Email</h4>
+                    <p className="text-white/60">info@herbalheaven.com</p>
+                    <p className="text-white/60">support@herbalheaven.com</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start space-x-4">
+                  <div className="w-12 h-12 bg-green-500/20 rounded-xl flex items-center justify-center text-2xl">
+                    ⏰
+                  </div>
+                  <div>
+                    <h4 className="text-white font-semibold">Business Hours</h4>
+                    <p className="text-white/60">Monday - Friday: 9:00 AM - 6:00 PM</p>
+                    <p className="text-white/60">Saturday: 10:00 AM - 4:00 PM</p>
+                    <p className="text-white/60">Sunday: Closed</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ===== DIRECTIONS SECTION BUTTONS ===== */}
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">
+              <span className="bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">
+                How to Find Us
+              </span>
+            </h2>
+            <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+              Visit our store for a personalized experience
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {/* Map */}
+            <div className="bg-gray-100 rounded-3xl overflow-hidden h-96">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3024.2219901290355!2d-74.00369368400567!3d40.71312937933035!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25a316e5c3c7f%3A0xf1a1f7b9b3b1f0!2sWall%20St%2C%20New%20York%2C%20NY%2C%20USA!5e0!3m2!1sen!2s!4v1620000000000!5m2!1sen!2s"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                className="w-full h-full"
+              ></iframe>
+            </div>
+
+            {/* Directions Info */}
+            <div className="space-y-6">
+              <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-3xl p-8">
+                <h3 className="text-2xl font-bold text-gray-800 mb-4">By Car</h3>
+                <p className="text-gray-600 mb-4">
+                  Take Highway 101 to Exit 42. Follow Main Street for 2 miles, then turn left onto Herbal Avenue. 
+                  Our store is on the right, next to the Natural Park.
+                </p>
+                <div className="flex items-center text-green-600">
+                  <span className="mr-2">🅿️</span>
+                  <span>Free parking available</span>
+                </div>
+              </div>
+
+              <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-3xl p-8">
+                <h3 className="text-2xl font-bold text-gray-800 mb-4">Public Transport</h3>
+                <div className="space-y-3">
+                  <div className="flex items-center">
+                    <span className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white mr-3">
+                      🚇
+                    </span>
+                    <span className="text-gray-600">Subway: Line 5 to Herbal Station (5 min walk)</span>
+                  </div>
+                  <div className="flex items-center">
+                    <span className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center text-white mr-3">
+                      🚌
+                    </span>
+                    <span className="text-gray-600">Bus: Routes 22, 34 to Herbal Ave Stop</span>
+                  </div>
+                  <div className="flex items-center">
+                    <span className="w-8 h-8 bg-yellow-500 rounded-full flex items-center justify-center text-white mr-3">
+                      🚲
+                    </span>
+                    <span className="text-gray-600">Bike sharing station available at corner</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* ✅ DIRECTIONS BUTTONS - 2 Buttons */}
+              <div className="flex gap-4">
+                <button className="flex-1 px-6 py-4 bg-green-600 text-white rounded-xl font-semibold hover:bg-green-700 transition-colors flex items-center justify-center">
+                  <span className="mr-2">🗺️</span>
+                  Get Directions
+                </button>
+                <button className="flex-1 px-6 py-4 bg-blue-600 text-white rounded-xl font-semibold hover:bg-blue-700 transition-colors flex items-center justify-center">
+                  <span className="mr-2">📱</span>
+                  Open in Maps
+                </button>
+              </div>
             </div>
           </div>
         </div>
