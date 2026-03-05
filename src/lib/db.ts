@@ -82,23 +82,25 @@ class MockDataStore {
   private stores: Map<string, any[]> = new Map()
 
   constructor() {
-    // Initialize with sample data
+    // Users store
     this.stores.set('users', [
       { id: '1', name: 'Admin User', email: 'admin@example.com', role: 'admin' },
       { id: '2', name: 'Regular User', email: 'user@example.com', role: 'user' }
     ])
 
+    // Products store
     this.stores.set('products', [
       { id: '1', name: 'Product 1', price: 29.99, stock: 100 },
       { id: '2', name: 'Product 2', price: 49.99, stock: 50 }
     ])
 
+    // Orders store
     this.stores.set('orders', [
       { id: '1', orderNumber: 'ORD-001', total: 70.38, status: 'delivered' },
       { id: '2', orderNumber: 'ORD-002', total: 59.49, status: 'shipped' }
     ])
 
-    // ===== ADD TASKS STORE HERE =====
+    // Tasks store
     this.stores.set('tasks', [
       { 
         id: '1', 
@@ -121,6 +123,40 @@ class MockDataStore {
         title: 'Update documentation', 
         status: 'completed',
         description: 'Update API docs',
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString()
+      }
+    ])
+
+    // ===== PROJECTS STORE =====
+    this.stores.set('projects', [
+      { 
+        id: '1', 
+        name: 'Website Redesign', 
+        status: 'active',
+        description: 'Redesign company website with modern UI',
+        progress: 65,
+        ownerId: '1',
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString()
+      },
+      { 
+        id: '2', 
+        name: 'Mobile App Development', 
+        status: 'planning',
+        description: 'Build cross-platform mobile app',
+        progress: 15,
+        ownerId: '1',
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString()
+      },
+      { 
+        id: '3', 
+        name: 'Marketing Campaign', 
+        status: 'completed',
+        description: 'Q2 marketing campaign',
+        progress: 100,
+        ownerId: '2',
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString()
       }
