@@ -1,29 +1,22 @@
+// src/app/api/projects/[projectId]/route.ts
+
 import { NextResponse } from 'next/server'
-import prisma from '@/lib/db'
+import { mockDb } from '@/lib/db'  // Change this line
 
 export async function GET(
   request: Request,
   { params }: { params: { projectId: string } }
 ) {
   try {
-    const project = await prisma.project.findUnique({
-      where: { id: params.projectId },
-      include: {
-        owner: true,
-        members: {
-          include: { user: true }
-        },
-        tasks: true
-      }
-    })
+    const project = await mockDb.findById('projects', params.projectId)
 
     if (!project) {
       return NextResponse.json({ error: 'Not found' }, { status: 404 })
     }
 
     return NextResponse.json({ success: true, project })
-
-  } catch {
+  } catch (error) {
+    console.error('Error:', error)
     return NextResponse.json({ error: 'Failed' }, { status: 500 })
   }
 }
@@ -34,12 +27,15 @@ export async function PUT(
 ) {
   try {
     const body = await request.json()
-    const project = await prisma.project.update({
-      where: { id: params.projectId },
-      data: body
-    })
+    const project = await mockDb.update('projects', params.projectId, body)
+    
+    if (!project) {
+      return NextResponse.json({ error: 'Not found' }, { status: 404 })
+    }
+    
     return NextResponse.json({ success: true, project })
-  } catch {
+  } catch (error) {
+    console.error('Error:', error)
     return NextResponse.json({ error: 'Failed' }, { status: 500 })
   }
 }
@@ -49,11 +45,15 @@ export async function DELETE(
   { params }: { params: { projectId: string } }
 ) {
   try {
-    await prisma.project.delete({
-      where: { id: params.projectId }
-    })
+    const deleted = await mockDb.delete('projects', params.projectId)
+    
+    if (!deleted) {
+      return NextResponse.json({ error: 'Not found' }, { status: 404 })
+    }
+    
     return NextResponse.json({ success: true })
-  } catch {
+  } catch (error) {
+    console.error('Error:', error)
     return NextResponse.json({ error: 'Failed' }, { status: 500 })
   }
 }
